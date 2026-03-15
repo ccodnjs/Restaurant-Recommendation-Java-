@@ -1,0 +1,117 @@
+package main; //패키지 이름
+
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+import javax.swing.border.EtchedBorder;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
+
+import org.w3c.dom.events.MouseEvent;
+
+class Main1 extends JFrame {//extends JFrame = 프레임 선언 없이 프레임 사용 가능
+    JScrollPane scrollPane;
+    ImageIcon icon;
+    ImageIcon buttonimage1;
+    ImageIcon buttonimage2;
+    ImageIcon buttonimage3;
+    public Main1() {
+    	super("백석대 교내/외 음식점");//위에 뜨는 이름 설정
+    	setVisible(true);//창 보이게하기
+    	setSize(800,800);//창 사이즈
+    	setResizable(false);//창 크기조절 불가
+    	setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    	
+    	//배경에 넣을 이미지 아이콘 불러오기
+        icon = new ImageIcon("C:\\Users\\gywkc\\workspace\\1.png");  
+        //배경 패널 생성
+        JPanel background = new JPanel() { 
+            public void paintComponent(Graphics g) {
+                g.drawImage(icon.getImage(), 0, 0, null);
+                setOpaque(false);
+                super.paintComponent(g);
+            }
+        };
+       
+        //버튼에 넣을 이미지 아이콘 불러오기
+		buttonimage1 = new ImageIcon("C:\\Users\\gywkc\\workspace\\in.png");
+		buttonimage2 = new ImageIcon("C:\\Users\\gywkc\\workspace\\out.png");
+		buttonimage3 = new ImageIcon("C:\\Users\\gywkc\\workspace\\random.png");
+        
+		//버튼 생성과 함께 이미지 추가
+        JButton btn1 = new JButton(buttonimage1);
+		JButton btn2 = new JButton(buttonimage2);
+		JButton btn3 = new JButton(buttonimage3);
+		
+		//버튼 위치(x,y) 크기(w,h)
+		btn1.setBounds(270, 400, 250, 70);
+		btn2.setBounds(270, 490, 250, 70);
+		btn3.setBounds(270, 580, 250, 70);
+		Font font = new Font("맑은 고딕",Font.BOLD, 30);
+		
+		//버튼에 폰트 추가
+		btn1.setFont(font);
+		btn2.setFont(font);
+		btn3.setFont(font);
+		
+		//배경에 버튼 추가
+		background.add(btn1);
+		background.add(btn2);
+		background.add(btn3);
+		
+		//버튼 테두리 삭제
+		btn1.setBorderPainted(false);
+		btn2.setBorderPainted(false);
+		btn3.setBorderPainted(false);
+		//버튼 배경삭제
+		btn1.setContentAreaFilled(false);
+		btn2.setContentAreaFilled(false);
+		btn3.setContentAreaFilled(false);
+		
+		//버튼1에 이벤트 추가
+		btn1.addActionListener(new ActionListener() { 
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				new BaekIn();
+				setVisible(false);
+			}
+		}
+		);
+		//버튼2에 이벤트 추가
+		btn2.addActionListener(new ActionListener() { 
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				new BaekOut();
+				setVisible(false);
+			}
+		}
+		);
+		//버튼3에 이벤트 추가
+		btn3.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				new Random();
+				setVisible(false);
+			}
+		}
+		);
+	
+
+		background.setLayout(null);
+        scrollPane = new JScrollPane(background);
+        setContentPane(scrollPane);
+    }
+}
+
+public class Main{ //메인 클래스
+	public static void main(String[] args) {
+        Main1 frame = new Main1(); //Main1 frame 열기
+        frame.setSize(800,800); //frame 사이즈
+        frame.setVisible(true); //frame 보이게하기
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //x버튼 누를 시 종료
+    }
+}

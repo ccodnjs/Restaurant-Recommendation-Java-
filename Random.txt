@@ -1,0 +1,57 @@
+
+import java.awt.Graphics;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
+public class Random extends JFrame{//클래스 이름, extends JFrame = 프레임 선언 없이 프레임 사용 가능
+	ImageIcon backicon;//뒤로가기에 넣을 이미지아이콘 선언
+	ImageIcon icon; //배경화면에 넣을 이미지아이콘 선언
+	public Random() {
+		super("랜덤 추첨");//창 이름
+   	    setLocation(0,0);//프레임 위치
+   	    setSize(800,800);//프레임 사이즈
+   	    setVisible(true);//Random 보이게하기
+   	    setLayout(null); 
+   	    setResizable(false);//창 크기조절 불가
+		
+   	    //위에 넣을 백석대사진 불러오기
+   	    icon = new ImageIcon("C:\\Users\\gywkc\\workspace\\111.png");
+   	    
+   	    //백석대 패널 생성
+   	    JPanel background = new JPanel() {
+   	    	public void paintComponent(Graphics g) {
+    		 g.drawImage(icon.getImage(), 0, 0, null);
+             setOpaque(false);
+             super.paintComponent(g);
+    	 }
+	   };
+	   
+	   background.setLocation(10,10);//패널 위치 설정
+	   background.setSize(770,130);//패널 사이즈 설정
+	   add(background);//프레임에 패널 추가
+
+		//뒤로가기 버튼에 넣을 이미지아이콘 불러오기
+  	    backicon = new ImageIcon("C:\\Users\\gywkc\\workspace\\back.png");
+  	    
+  	    //뒤로가기 버튼 생성과 함께 이미지 추가
+  	    JButton back = new JButton(backicon);
+  	    
+  	    //뒤로가기 이벤트에 액션리스너 추가
+  	    back.addActionListener(new ActionListener() {
+  	        @Override
+  	        public void actionPerformed(ActionEvent e) {
+  	            new Main1();//Main1 실행하기
+  	            setVisible(false);//Random은 안보이게 설정
+  	        }
+  	    });
+  	 	back.setLocation(10,15);//뒤로가기 버튼 위치
+  		back.setSize(40,40);//뒤로가기 버튼 사이즈
+  	    add(back);//프레임에 뒤로가기 버튼 추가
+		
+		}
+}
